@@ -1,55 +1,18 @@
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
+//global variables
+const navItems = document.querySelectorAll('section')
+const navList = document.querySelector('#navbar__list')
 
-/**
- * Define Global Variables
- * 
-*/
+//build navigation menu
+navItems.forEach((item) => {
+  const navItem = `<li class="nav-item"><a href="#${item.id}" class="menu__link" data-link="${item.id}">${item.dataset.nav}</li>`
+  navList.insertAdjacentHTML('beforeend', navItem)
+})
 
+//add scroll when nav item is clicked
+navList.addEventListener('click', (e) => {
+  e.preventDefault()
+  requestedScrollSection = document.getElementById(e.target.dataset.link)
+  requestedScrollSection.scrollIntoView({ behavior: 'smooth' })
+})
 
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
-
-// build the nav
-
-
-// Add class 'active' to section when near top of viewport
-
-
-// Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
-
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
+//add active class when section is in viewport
