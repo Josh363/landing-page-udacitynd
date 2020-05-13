@@ -15,4 +15,29 @@ navList.addEventListener('click', (e) => {
   requestedScrollSection.scrollIntoView({ behavior: 'smooth' })
 })
 
-//add active class when section is in viewport
+//helper function to check if element is in viewport
+//used https://gomakethings.com/how-to-test-if-an-element-is-in-the-viewport-with-vanilla-javascript/
+const isInViewport = (elem) => {
+  const bounding = elem.getBoundingClientRect()
+  return (
+    bounding.top >= 0 &&
+    bounding.left >= 0 &&
+    bounding.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    bounding.right <=
+      (window.innerWidth || document.documentElement.clientWidth)
+  )
+}
+
+//add active class to section element when section is in viewport
+window.addEventListener('scroll', (e) => {
+  navItems.forEach((item) => {
+    if (isInViewport(item)) {
+      item.classList.add('active')
+    } else {
+      if (item.classList.contains('active')) {
+        item.classList.remove('active')
+      }
+    }
+  })
+})
